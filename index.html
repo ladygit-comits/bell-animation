@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card" id="notificationCard">
+            <lord-icon
+                src="https://cdn.lordicon.com/vspbqszr.json"
+                trigger="in"
+                state="loop-bell"
+                colors="primary:#ffffff"
+                style="width:50px;height:50px">
+            </lord-icon>
+            <span class="notification-text">2 Notifications</span>
+        </div>
+        <div class="follower-card">
+            <p>
+                <img src="follow.png" alt="follow icon">
+                <span>John Doe
+                   <br>followed you
+                </span>
+            </p>
+            <p>
+                <img src="follow.png" alt="follow icon">
+                <span>Jane Doe
+                    <br>followed you
+                 </span>
+            </p>
+        </div>
+    </div>
+
+    <audio id="notificationSound">
+        <source src="notification.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const notificationCard = document.getElementById("notificationCard");
+            const notificationSound = document.getElementById("notificationSound");
+    
+            
+            function playNotificationSound() {
+                notificationSound.currentTime = 0;
+                notificationSound.play();
+            }
+    
+           
+            notificationCard.addEventListener("animationstart", playNotificationSound);
+            window.addEventListener("load", playNotificationSound);
+    
+            
+            notificationCard.addEventListener("animationstart", function animationStartHandler() {
+                playNotificationSound();
+                notificationCard.removeEventListener("animationstart", animationStartHandler);
+            });
+        });
+    </script>
+    
+    
+</body>
+</html>
